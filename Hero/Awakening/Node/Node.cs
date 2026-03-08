@@ -1,5 +1,3 @@
-
-
 public class Node
 {
     public NodeType NodeType {get;}
@@ -28,9 +26,9 @@ public class Node
         Required = new List<Node>();
     }
 
-    public Node(NodeType nodeType, int value, NodePrice nodePrice, List<Node> required)
+    public Node(NodeType nodeType, int value, int evolutionStateRequired, NodePrice nodePrice, List<Node> required)
     {
-        this(nodeType, value, nodePrice);
+        this(nodeType, value, evolutionStateRequired, nodePrice);
         Required = required;
     }
 
@@ -39,7 +37,7 @@ public class Node
         IsUnlocked = true;
     }
 
-    public int Buy()
+    public NodePrice Buy()
     {
         if (!IsUnlocked)
         {
@@ -53,6 +51,6 @@ public class Node
             }
         }
         IsBought = true;
-        return NodePrice.Gold;
+        return NodePrice;
     }
 }

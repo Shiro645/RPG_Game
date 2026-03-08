@@ -4,6 +4,7 @@ namespace RPG.Hero.Awakening.AwakeningStone.AwakeningStoneType
     {
         Small, 
         Medium, 
-        Large
+        Large,
+        Special
     }
 }
