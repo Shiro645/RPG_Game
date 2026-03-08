@@ -132,11 +132,36 @@ public class NodePrice
                 }
             }
         }
+        AwakeningStoneList = newAwakeningStoneList;
     }
 
     public void ReverseNomalize()
     {
-        
+        Dictionary<AwakeningStone, int> newAwakeningStoneList = new Dictionary<AwakeningStone, int>();
+        foreach (var (key, value) in AwakeningStoneList)
+        {
+            AwakeningStone smallStone = new AwakeningStone(AwakeningStoneType.Small, key.Color);
+            int newValue = value;
+
+            if (key.Type == AwakeningStoneType.Large)
+            {
+                newValue = value * 500;
+            }
+            else if (key.Type == AwakeningStoneType.Small)
+            {
+                newValue = value * 50;
+            }
+
+            if (newAwakeningStoneList.ContainsKey(smallStone))
+            {
+                newAwakeningStoneList[smallStone] = newValue;
+            }
+            else
+            {
+                newAwakeningStoneList[smallStone] += newValue;
+            }
+        }
+        AwakeningStoneList = newAwakeningStoneList;
     }
 
     public NodePrice operator +(NodePrice a, NodePrice b)
