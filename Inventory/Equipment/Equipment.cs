@@ -1,5 +1,3 @@
-using System.Dynamic;
-
 public class Equipment
 {
     protected string name;

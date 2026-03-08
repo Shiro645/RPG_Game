@@ -1,6 +1,6 @@
-namespace RPG.Type
+namespace RPG.Element
 {
-    public enum Type
+    public enum Element
     {
         Earth,
         Fire,

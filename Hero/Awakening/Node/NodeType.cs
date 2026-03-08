@@ -1,4 +1,4 @@
-namespace Awakening.NodeType
+namespace RPG.Heroes.Awakening.NodeType
 {
     public enum NodeType
     {

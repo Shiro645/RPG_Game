@@ -1,4 +1,4 @@
-namespace Awakening.AwakeningStone.AwakeningStoneType
+namespace RPG.Hero.Awakening.AwakeningStone.AwakeningStoneType
 {
     public enum AwakeningStoneType
     {
