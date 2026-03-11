@@ -1,17 +1,14 @@
 namespace Scripts.Hero.Party.Utils
 {
-    public enum PartyBuff
+    public class PartyBuff
     {
-        NormalAttack,
-        ElementAttack,
-        MeleeDamage,
-        RangedDamage,
-        MagicalDamage,
-        SkillDamage,
-        CritRate,
-        CritMultiplier,
-        WeaponSkillRegen,
-        Def,
-        HP
+        public PartyBuffType BuffType { get; private set; }
+        public int Value { get; private set; }
+
+        public PartyBuff(PartyBuffType buffType, int value)
+        {
+            BuffType = buffType;
+            Value = value;
+        }
     }
 }

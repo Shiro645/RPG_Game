@@ -62,7 +62,6 @@ namespace Scripts.Hero
         public Bonuses Bonuses { get; private set; }
 
         public PartyBuff[] PartyBuffs { get; }
-        public int[] PartyBuffsValues { get; }
 
         public ChainSkill ChainSkill { get; }
 
@@ -88,7 +87,6 @@ namespace Scripts.Hero
             Bonuses = new int[8][5];
 
             PartyBuffs = partyBuffs;
-            PartyBuffsValues = partyBuffsValues;
 
             ChainSkill = chainSkill;
         }

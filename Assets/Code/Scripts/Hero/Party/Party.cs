@@ -5,7 +5,11 @@ namespace Scripts.Hero.Party
         public PartyMember[] Members { get; private set; }
         public int MembersCount { get; private set; }
 
+        public Dictionary<Hero, PartyBuff[]> PartyBuffSet { get; private set; }
+
         public static int DEFAULT_PARTY_SIZE = 4;
+
+        public Dictionary<PartyMember, PartyBuff[]> PartyBuffs { get; private set; }
 
         public Party(int partySize)
         {
@@ -25,11 +29,12 @@ namespace Scripts.Hero.Party
 
         public void AddHero(Hero hero)
         {
-            if (MembersCount > Members.Length)
+            if (MembersCount >= Members.Length)
             {
                 throw new Exception("Party is full");
             }
-            Members[MembersCount++] = new PartyMember(hero);
+            PartyBuffSet.Add(hero, hero.PartyBuffs);
+            Members[MembersCount++] = new PartyMember(hero, MembersCount, PartyBuffSet);
         }
 
         public void ReplaceHero(Hero hero, int position)
@@ -38,16 +43,20 @@ namespace Scripts.Hero.Party
             {
                 throw new ArgumentOutOfRangeException("Position out of bounds");
             }
-            else if (position > MembersCount)
+            else if (position >= MembersCount)
             {
                 AddHero(hero);
             }
-            Members[position] = new PartyMember(hero);
+            else
+            {
+                PartyBuffSet.Remove(Members[position]);
+                Members[position] = new PartyMember(hero);
+            }
         }
 
         public void RemoveHero(int position)
         {
-            if (position < 0 || position > MembersCount)
+            if (position < 0 || position >= MembersCount)
             {
                 throw new ArgumentOutOfRangeException("Position out of bounds");
             }
@@ -55,7 +64,7 @@ namespace Scripts.Hero.Party
             {
                 Members[i] = Members[i + 1];
             }
-            Members[--MembersCount] = null;
+            Members[MembersCount--] = null;
         }
     }
 }
