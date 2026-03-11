@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace Scripts.Hero.Awakening.Node
 {
     public class Node // Node of the Awakening Tree
@@ -13,8 +11,7 @@ namespace Scripts.Hero.Awakening.Node
         public NodePrice NodePrice { get; }
         public bool IsBought { get; private set; }
 
-        public List<Node> Required { get; }
-        public List<Node> Children { get; }
+        public List<Node> Required { get; private set; }
 
         public Node(NodeType nodeType, int value, int evolutionStateRequired, NodePrice nodePrice)
         {
@@ -41,18 +38,31 @@ namespace Scripts.Hero.Awakening.Node
             IsUnlocked = true;
         }
 
-        public NodePrice Buy() // Return the price to buy the node
+        public bool CanBeBought(Inventory inventory)
         {
             if (!IsUnlocked)
             {
-                return null;
+                return false;
             }
             foreach (Node node in Required)
             {
                 if (!node.IsBought)
                 {
-                    return null;
+                    return false;
                 }
+            }
+            if (!inventory.CanAfford(NodePrice))
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public NodePrice Buy(Inventory inventory) // Return the price to buy the node
+        {
+            if (!CanBeBought(inventory))
+            {
+                throw new InvalidOperationException("Node cannot be bought.");
             }
             IsBought = true;
             return NodePrice;

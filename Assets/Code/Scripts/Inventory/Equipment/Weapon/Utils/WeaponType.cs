@@ -1,4 +1,4 @@
-namespace Scripts.Inventory.Equipment.Weapon
+namespace Scripts.Inventory.Equipment.Weapon.Utils
 {
     public enum WeaponType
     {

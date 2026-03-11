@@ -1,7 +1,4 @@
-using Scripts.Hero;
-using System.Collections.Generic;
-
-namespace Scripts.Hero.Stats
+namespace Scripts.Hero.Stats.Utils
 {
     public static class ConstantHeroes // Base Stat Modifiers of each Role 
     {

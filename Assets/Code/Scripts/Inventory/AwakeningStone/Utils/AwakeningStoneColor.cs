@@ -1,4 +1,4 @@
-namespace Scripts.Inventory.AwakeningStone
+namespace Scripts.Inventory.AwakeningStone.Utils
 {
     public enum AwakeningStoneColor
     {

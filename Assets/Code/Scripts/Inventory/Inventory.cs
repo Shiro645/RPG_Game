@@ -4,6 +4,7 @@ namespace Scripts.Inventory
     {
         public int Gold { get; }
         public int Gems { get; }
-        public System.Collections.Generic.Dictionary<AwakeningStone, int> AwakeningStones { get; }
+        public Dictionnary<AwakeningStone, int> AwakeningStones { get; }
+
     }
 }

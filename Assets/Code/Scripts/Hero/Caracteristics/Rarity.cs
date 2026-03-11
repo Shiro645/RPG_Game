@@ -1,4 +1,4 @@
-namespace Scripts.Hero
+namespace Scripts.Hero.Caracteristics
 {
     public enum Rarity
     {

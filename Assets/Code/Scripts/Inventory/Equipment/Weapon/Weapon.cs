@@ -1,95 +1,71 @@
-using System.Runtime.CompilerServices;
-
 namespace Scripts.Inventory.Equipment.Weapon
 {
     public class Weapon : Equipment
     {
-    private Element element;
-    private WeaponType weaponType;
-    private double constantWeapon;
+        public Element ElementDamage { get; }
+        public WeaponType WeaponType { get; }
+        public double ConstantWeapon { get; }
 
-    private Skill skill;
+        public Skill Skill { get; }
 
-    private int damage
-    {
-        get { }
-        set
+        public int BaseDamage { get; }
+        public int BaseAtkSpeed { get; }
+
+        public int[] DamageBonus { get; private set; }
+        public int[] AtkSpeedBonus { get; private set; }
+
+        public Weapon(string name, string description, EquipmentRarity equipmentRarity, WeaponType weaponType, Skill skill, int damage, int atkSpeed) : base(name, description, equipmentRarity)
         {
-            if (value < 0)
-            {
-                damage = 0;
-            }
-            else
-            {
-                damage = value;
-            }
-        }
-    }
-    private int atkSpeed
-    {
-        get { }
-        set
-        {
-            if (value < 0)
-            {
-                atkSpeed = 0;
-            }
-            else
-            {
-                atkSpeed = value;
-            }
-        }
-    }
-
-    public Weapon(string name, string description, EquipmentRarity equipmentRarity, WeaponType weaponType, Skill skill, int damage, int atkSpeed) : base(name, description, equipmentRarity)
-    {
-        this.weaponType = weaponType;
-
-        switch (weaponType)
-        {
-            case OneHandedSword:
-                constantWeapon = 1.5;
-                break;
-            case TwoHandedSword:
-                constantWeapon = 2.5;
-                break;
-            case Bow:
-                constantWeapon = 2;
-                break;
-            case Dagues:
-                constantWeapon = 1;
-                break;
-            case Staff:
-                constantWeapon = 2;
-                break;
-            case Orb:
-                constantWeapon = 1.5;
-                break;
-            case Gauntlet:
-                constantWeapon = 2.5;
-                break;
-            case Rifle:
-                constantWeapon = 3;
-                break;
-            default:
-                constantWeapon = 0;
-                break;
+            WeaponType = weaponType;
+            ElementDamage = ElementDamage;
+            ConstantWeapon = ConstantWeapons.Values[weaponType];
+            Skill = skill;
+            BaseDamage = damage;
+            BaseAtkSpeed = atkSpeed;
+            DamageBonus = new int[3];
+            AtkSpeedBonus = new int[3];
         }
 
-        this.skill = skill;
+        public Skill GetSkill()
+        {
+            return Skill;
+        }
 
-        this.damage = damage;
-        this.atkSpeed = atkSpeed;
-    }
+        public int GetDPS()
+        {
+            return (int)((Math.Log(level) + 1) * damage * atkSpeed * constantWeapon);
+        }
 
-    public Skill GetSkill()
-    {
-        return skill;
-    }
+        public void AddDamageBonus(int bonus)
+        {
+            int minIndex = 0;
+            for (int i = 1; i < DamageBonus.Length; i++)
+            {
+                if (DamageBonus[i] < DamageBonus[minIndex])
+                {
+                    minIndex = i;
+                }
+            }
+            if (bonus > DamageBonus[minIndex])
+            {
+                DamageBonus[minIndex] = bonus;
+            }
+        }
 
-    public int GetDPS()
-    {
-        return (int)((Math.Log(level) + 1) * damage * atkSpeed * constantWeapon);
-    }
+        public void AddAtkSpeedBonus(int bonus)
+        {
+            int minIndex = 0;
+            for (int i = 1; i < AtkSpeedBonus.Length; i++)
+            {
+                if (AtkSpeedBonus[i] < AtkSpeedBonus[minIndex])
+                {
+                    minIndex = i;
+                }
+            }
+            if (bonus > AtkSpeedBonus[minIndex])
+            {
+                AtkSpeedBonus[minIndex] = bonus;
+            }
+        }
     }
 }

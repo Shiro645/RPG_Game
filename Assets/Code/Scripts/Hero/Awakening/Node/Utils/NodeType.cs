@@ -1,4 +1,4 @@
-namespace Scripts.Hero.Awakening.Node
+namespace Scripts.Hero.Awakening.Node.Utils
 {
     public enum NodeType
     {

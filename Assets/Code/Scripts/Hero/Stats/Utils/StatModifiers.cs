@@ -1,4 +1,4 @@
-namespace Scripts.Hero.Stats
+namespace Scripts.Hero.Stats.Utils
 {
     public class StatModifiers
     {

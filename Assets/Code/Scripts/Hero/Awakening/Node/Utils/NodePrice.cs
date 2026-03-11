@@ -1,7 +1,4 @@
-using Scripts.Inventory.AwakeningStone;
-using System.Collections.Generic;
-
-namespace Scripts.Hero.Awakening.Node
+namespace Scripts.Hero.Awakening.Node.Utils
 {
     public class NodePrice // Combination of Gold and all the awakening stones required to buy the node
     {
@@ -22,6 +19,7 @@ namespace Scripts.Hero.Awakening.Node
 
         public static NodePrice operator +(NodePrice a, NodePrice b) // Add the values of each property of each nodeprice together
         {
+            a.Gold += b.Gold;
             foreach (var kv in b.AwakeningStoneList)
             {
                 var key = kv.Key;
@@ -35,7 +33,6 @@ namespace Scripts.Hero.Awakening.Node
                     a.AwakeningStoneList[key] = value;
                 }
             }
-            a.Gold += b.Gold;
             return a;
         }
     }

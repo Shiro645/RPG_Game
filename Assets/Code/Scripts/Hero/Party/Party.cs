@@ -40,9 +40,22 @@ namespace Scripts.Hero.Party
             }
             else if (position > MembersCount)
             {
-                Members[MembersCount++] = new PartyMember(hero);
+                AddHero(hero);
             }
             Members[position] = new PartyMember(hero);
+        }
+
+        public void RemoveHero(int position)
+        {
+            if (position < 0 || position > MembersCount)
+            {
+                throw new ArgumentOutOfRangeException("Position out of bounds");
+            }
+            for (int i = position; i < MembersCount - 1; i++)
+            {
+                Members[i] = Members[i + 1];
+            }
+            Members[--MembersCount] = null;
         }
     }
 }

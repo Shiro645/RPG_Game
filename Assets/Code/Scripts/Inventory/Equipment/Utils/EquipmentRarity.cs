@@ -1,4 +1,4 @@
-namespace Scripts.Inventory.Equipment
+namespace Scripts.Inventory.Equipment.Utils
 {
     public enum EquipmentRarity
     {
@@ -6,6 +6,6 @@ namespace Scripts.Inventory.Equipment
         Common,
         Rare,
         Epic,
-        Legen
+        Legend
     }
 }
