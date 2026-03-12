@@ -11,16 +11,18 @@ namespace Scripts.Hero.Stats.Utils
         public int[] CritMultiplier { get; private set; }
         public int[] CritResistance { get; private set; }
 
+        public static int MAX_BONUS_COUNT = 5;
+
         public Bonuses()
         {
-            Atk = new int[5];
-            HP = new int[5];
-            Def = new int[5];
-            Heal = new int[5];
-            DamageReduction = new int[5];
-            CritRate = new int[5];
-            CritMultiplier = new int[5];
-            CritResistance = new int[5];
+            Atk = new int[MAX_BONUS_COUNT];
+            HP = new int[MAX_BONUS_COUNT];
+            Def = new int[MAX_BONUS_COUNT];
+            Heal = new int[MAX_BONUS_COUNT];
+            DamageReduction = new int[MAX_BONUS_COUNT];
+            CritRate = new int[MAX_BONUS_COUNT];
+            CritMultiplier = new int[MAX_BONUS_COUNT];
+            CritResistance = new int[MAX_BONUS_COUNT];
         }
     }
 }

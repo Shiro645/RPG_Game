@@ -64,6 +64,7 @@ namespace Scripts.Hero.Party
             {
                 Members[i] = Members[i + 1];
             }
+            PartyBuffSet.Remove(Members[MembersCount]);
             Members[MembersCount--] = null;
         }
     }

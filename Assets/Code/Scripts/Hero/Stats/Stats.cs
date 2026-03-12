@@ -11,6 +11,8 @@ namespace Scripts.Hero.Stats
         public int CritMultiplier { get; }
         public int CritResistance { get; }
 
+        public static int STATS_COUNT = 8;
+
         public Stats(int atk, int hp, int def, int heal, int damageReduction, int critRate, int critMultiplier, int critResistance)
         {
             Atk = atk;

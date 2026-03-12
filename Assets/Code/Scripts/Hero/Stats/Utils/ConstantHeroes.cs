@@ -2,6 +2,8 @@ namespace Scripts.Hero.Stats.Utils
 {
     public static class ConstantHeroes // Base Stat Modifiers of each Role 
     {
+        public static readonly int MaxValue = 5;
+
         public static readonly Dictionary<Role, StatModifiers> Values = new()
         {
             {Role.Warrior,  new StatModifiers(3.5, 3.0, 2.5, 1.0, 2.0, 2.5, 3.0, 2.0)},

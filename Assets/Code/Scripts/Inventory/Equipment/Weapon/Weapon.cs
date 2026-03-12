@@ -14,6 +14,8 @@ namespace Scripts.Inventory.Equipment.Weapon
         public int[] DamageBonus { get; private set; }
         public int[] AtkSpeedBonus { get; private set; }
 
+        public static int MAX_BONUS_COUNT = 3;
+
         public Weapon(string name, string description, EquipmentRarity equipmentRarity, WeaponType weaponType, Skill skill, int damage, int atkSpeed) : base(name, description, equipmentRarity)
         {
             WeaponType = weaponType;
@@ -22,19 +24,50 @@ namespace Scripts.Inventory.Equipment.Weapon
             Skill = skill;
             BaseDamage = damage;
             BaseAtkSpeed = atkSpeed;
-            DamageBonus = new int[3];
-            AtkSpeedBonus = new int[3];
+            DamageBonus = new int[MAX_BONUS_COUNT];
+            AtkSpeedBonus = new int[MAX_BONUS_COUNT];
         }
 
-        public Skill GetSkill()
-        {
-            return Skill;
-        }
+        // DPS related methods
+        // DPS depends on the weapon's damage, attack speed, and any bonuses applied to them.
 
         public int GetDPS()
         {
-            return (int)((Math.Log(level) + 1) * damage * atkSpeed * constantWeapon);
+            GetTotalDamage() * GetTotalAtkSpeed();
         }
+
+        public int GetTotalDamage()
+        {
+            int totalDamage = (int)(BaseDamage * (Math.Log(Level) + 1) * ConstantWeapon * (1 + 1 / Enum.GetNames(typeof(EquipmentRarity)).Length * (int)Rarity) * (1 + GetDamageBonus() * 0.01));
+        }
+
+        public int GetDamageBonus()
+        {
+            int totalBonus = 0;
+            foreach (var bonus in DamageBonus)
+            {
+                totalBonus += bonus;
+            }
+            return totalBonus;
+        }
+
+        public int GetTotalAtkSpeed()
+        {
+            return (int)(BaseAtkSpeed * (1 + GetAtkSpeedBonus() * 0.01));
+        }
+
+        public int GetAtkSpeedBonus()
+        {
+            int totalBonus = 0;
+            foreach (var bonus in AtkSpeedBonus)
+            {
+                totalBonus += bonus;
+            }
+            return totalBonus;
+        }
+
+
+        // Bonuses related methods
 
         public void AddDamageBonus(int bonus)
         {
